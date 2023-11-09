@@ -1,12 +1,12 @@
 <template>
-  <div class="blog-wrapper">
+  <div class="blog-wrapper no-user">
     <div class="blog-content">
       <div>
         <h2 v-if="post.welcomeScreen">{{ post.title }}</h2>
         <h2 v-else>{{ post.title }}</h2>
         <p v-if="post.welcomeScreen">{{ post.blogPost }}</p>
         <p class="content-preview" v-else>{{ post.blogHtml }}</p>
-        <router-link class="link" v-if="post.welcomeScreen" to="#">
+        <router-link class="link link-light" v-if="post.welcomeScreen" to="#">
           Login/Register
           <img
             class="arrow arrow-light"
@@ -14,24 +14,24 @@
             alt=""
           />
         </router-link>
-        <router-link class="link-light" v-else to="#">
-          Login/Register
+        <router-link class="link" v-else to="#">
+          View The Post
           <img class="arrow" src="../assets/Icons/arrow.png" alt="" />
         </router-link>
       </div>
     </div>
-      <div class="blog-photo">
-        <img
-          v-if="post.welcomeScreen"
-          :src="require(`../assets/blogPhotos/${post.photos}.jpg`)"
-          alt=""
-        />
-        <img
-          v-else
-          :src="require(`../assets/blogPhotos/${post.blogCoverPhoto}.jpg`)"
-          alt=""
-        />
-      </div>
+    <div class="blog-photo">
+      <img
+        v-if="post.welcomeScreen"
+        :src="require(`../assets/blogPhotos/${post.photos}.jpg`)"
+        alt=""
+      />
+      <img
+        v-else
+        :src="require(`../assets/blogPhotos/${post.blogCoverPhoto}.jpg`)"
+        alt=""
+      />
+    </div>
   </div>
 </template>
 
@@ -79,13 +79,13 @@ export default {
         padding: 0 24px;
       }
 
-      h2 {                     
+      h2 {
         font-size: 32px;
         font-weight: 300;
         text-transform: uppercase;
         margin-bottom: 24px;
         @media (min-width: 700px) {
-           font-size: 40px;
+          font-size: 40px;
         }
       }
 
@@ -104,18 +104,13 @@ export default {
         text-overflow: ellipsis;
       }
 
-      .arrow {
-        max-width: 20px;
-        margin-left: 50px;
-      }
-
       .link {
         display: inline-flex;
         align-items: center;
         margin-top: 32px;
         padding-bottom: 4px;
         border-bottom: 1px solid transparent;
-        transition: .5s ease-in all;
+        transition: 0.5s ease-in all;
 
         &:hover {
           border-bottom-color: aqua;
@@ -129,8 +124,8 @@ export default {
       }
     }
   }
-                         
-  .blog-photo {     
+
+  .blog-photo {
     order: 1;
     flex: 3;
     box-shadow: 0 4px 6px -1px rgba($color: #e96907, $alpha: 1);
@@ -141,7 +136,7 @@ export default {
     @media (min-width: 800px) {
       flex: 4;
     }
-    
+
     img {
       display: block;
       width: 100%;
@@ -150,13 +145,20 @@ export default {
     }
   }
 
-  .blog-wrapper:nth-child(even) {
-.blog-content {
-  order: 2;
+  &:nth-child(even) {
+    .blog-content {
+      order: 2;
+    }
+    .blog-photo {
+      order: 1;
+    }
+  }
 }
-.blog-photo {
-  order: 1;
-}
+
+.no-user:first-child {
+  .blog-content {
+    background-color: rgb(148, 190, 176);
+    color: #fff;
   }
 }
 </style>
