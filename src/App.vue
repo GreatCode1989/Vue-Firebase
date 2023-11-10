@@ -1,10 +1,10 @@
 <template>
   <div class="app-wrapper">
     <div class="app">
-      <Navigation />
+      <Navigation v-if="!navigation" />
 
       <router-view />
-      <Footer />
+      <Footer v-if="!navigation" />
     </div>
   </div>
 </template>
@@ -17,12 +17,32 @@ export default {
   name: "app",
   components: { Navigation, Footer },
   data() {
-    return {};
+    return {
+      navigation: null,
+    };
   },
-  created() {},
+  created() {
+    this.checkRoute();
+  },
   mounted() {},
-  methods: {},
-  watch: {},
+  methods: {
+    checkRoute() {
+      if (
+        this.$route.name === "login" ||
+        this.$route.name === "register" ||
+        this.$route.name === "forgotPassword"
+      ) {
+        this.navigation = true;
+        return;
+      }
+      this.navigation = false;
+    },
+  },
+  watch: {
+    $route() {
+      this.checkRoute()
+    }
+  },
 };
 </script>
 
@@ -74,7 +94,7 @@ export default {
 
 button,
 .router-button {
-  transition: 500ms ease all ;
+  transition: 500ms ease all;
   cursor: pointer;
   margin-top: 24px;
   padding: 12px 24px;
@@ -92,6 +112,36 @@ button,
   &:hover {
     background-color: rgb(38, 179, 234);
   }
+}
+
+.button-ghost {
+  color: #000;
+  padding: 0;
+  border-radius: 0;
+  margin-top: 50px;
+  font-size: 15px;
+  font-weight: 500;
+  background-color: transparent;
+  @media (min-width: 70px) {
+    margin-top: 0;
+    margin-left: auto;
+  }
+
+  i {
+    margin-left: 8px;
+  }
+}
+
+.button-light {
+  background-color: transparent;
+  border: 2px solid #fff;
+  color: #fff;
+}
+
+.button-inactive {
+  pointer-events: none !important;
+  cursor: none !important;
+  background-color: rgb(104, 109, 107);
 }
 
 .blog-card-wrap {

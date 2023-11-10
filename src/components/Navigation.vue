@@ -8,10 +8,10 @@
       </div>
       <div class="nav-links">
         <ul v-show="!mobile">
-          <router-link class="link" to="#">Home</router-link>
-          <router-link class="link" to="#">Blogs</router-link>
-          <router-link class="link" to="#">Create Post</router-link>
-          <router-link class="link" to="#">Login/Reister</router-link>
+          <router-link class="link" :to="{name: 'home'}">Home</router-link>
+          <router-link class="link" :to="{name: 'blogs'}">Blogs</router-link>
+          <router-link class="link" :to="{name: 'newPost'}">Create Post</router-link>
+          <router-link class="link" :to="{name: 'login'}">Login/Reister</router-link>
         </ul>
       </div>
     </nav>
@@ -24,10 +24,10 @@
     />
     <transition class="mobile-bar" name="mobile-nav">
       <ul v-show="mobileNav">
-        <router-link class="link" to="#">Home</router-link>
-        <router-link class="link" to="#">Blogs</router-link>
-        <router-link class="link" to="#">Create Post</router-link>
-        <router-link class="link" to="#">Login/Reister</router-link>
+        <router-link class="link" :to="{name: 'home'}">Home</router-link>
+        <router-link class="link" :to="{name: 'blogs'}">Blogs</router-link>
+        <router-link class="link" :to="{name: 'newPost'}">Create Post</router-link>
+        <router-link class="link" :to="{name: 'login'}">Login/Reister</router-link>
       </ul>
     </transition>
   </header>
