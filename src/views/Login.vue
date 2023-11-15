@@ -7,7 +7,9 @@
           Register
         </router-link>
       </p>
-      <h2>Login to FireBlogs</h2>
+      <router-link :to="{ name: 'home' }" style="text-decoration: none"
+        ><h2>Sign In Your Acccount</h2></router-link
+      >
       <div class="inputs">
         <div class="input">
           <input type="text" placeholder="Email" v-model="email" />
@@ -17,11 +19,12 @@
           <input type="password" placeholder="Password" v-model="password" />
           <img src="../assets/Icons/lock.jpg" alt="" />
         </div>
+        <div v-show="error" class="error">{{ this.errorMsg }}</div>
       </div>
       <router-link class="forgot-password" :to="{ name: 'forgotPassword' }">
         Forgot your password?
       </router-link>
-      <button>Sign In</button>
+      <button @click.prevent="signIn">Sign In</button>
       <div class="angle"></div>
     </form>
     <div class="background"></div>
@@ -29,6 +32,8 @@
 </template>
 
 <script>
+import firebase from "firebase/app";
+import "firebase/auth";
 export default {
   name: "Login",
 
@@ -36,7 +41,24 @@ export default {
     return {
       email: null,
       password: null,
+      error: null,
+      errorMsg: "",
     };
+  },
+  methods: {
+    signIn() {
+      firebase
+        .auth()
+        .signInWithEmailAndPassword(this.email, this.password)
+        .then(() => {
+          this.$router.push({ name: "home" });
+          this.error = false;
+          this.errorMsg = "";
+        })
+        .catch((err) => {
+          (this.error = true), (this.errorMsg = err.mtssage);
+        });
+    },
   },
 };
 </script>
@@ -58,11 +80,8 @@ export default {
     margin-bottom: 32px;
 
     .router-link {
-        color: #383434;
+      color: #383434;
     }
-
-    
-   
   }
 
   form {
@@ -73,76 +92,74 @@ export default {
     justify-content: center;
     align-items: center;
     flex: 1;
-    @media(min-width: 900px) {
-        padding: 0 50px;
+    @media (min-width: 900px) {
+      padding: 0 50px;
     }
 
-
     h2 {
-        text-align: center;
-        font-size: 32px;
-        color: rgb(0, 255, 0);
-        margin-bottom: 40px;
-        @media(min-width: 900px) {
-            font-size: 40px;
-        }
+      text-align: center;
+      font-size: 32px;
+      color: rgb(0, 255, 0);
+      margin-bottom: 40px;
+      @media (min-width: 900px) {
+        font-size: 40px;
+      }
     }
 
     .inputs {
-        width: 100%;
-        max-width: 350px;
+      width: 100%;
+      max-width: 350px;
 
-        .input {
-            position: relative;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            margin-bottom: 8px;
-            input {
-                width: 100%;
-                border: none;
-                background-color:aliceblue;
-                padding: 4px 4px 4px 30px;
-                height: 50px;
+      .input {
+        position: relative;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-bottom: 8px;
+        input {
+          width: 100%;
+          border: none;
+          background-color: aliceblue;
+          padding: 4px 4px 4px 30px;
+          height: 50px;
 
-                &:focus {
-                    outline: none;
-                }
-                
-            }
-
-            img {
-                width: 18px;
-               position: absolute;
-               left: 6px;
-            }
+          &:focus {
+            outline: none;
+          }
         }
+
+        img {
+          width: 18px;
+          position: absolute;
+          left: 6px;
+        }
+      }
     }
 
     .forgot-password {
-        text-decoration: none;
-        color: rgb(57, 57, 57);
-        font-size: 14px;
-        margin: 16px 0 32px;
-        border-bottom: 1px solid transparent;
-        transition: 0.5s ease all;
+      text-decoration: none;
+      color: rgb(57, 57, 57);
+      font-size: 14px;
+      margin: 16px 0 32px;
+      border-bottom: 1px solid transparent;
+      transition: 0.5s ease all;
 
-        &:hover {
-            border-color: rgb(89, 0, 255);
-        }
+      &:hover {
+        border-color: rgb(89, 0, 255);
+      }
     }
 
     .angle {
-        display: none;
-        position: absolute;
-        background-color: #fff;
-        transform: rotateZ(3deg);
-        width: 60px;
-        right: -30px;
-        height: 101%;
-        @media(min-width: 900px) {
-            display: initial;
-        }
+      display: none;
+      position: absolute;
+      background-color: #fff;
+      transform: rotateZ(3deg);
+      width: 60px;
+      right: -30px;
+      height: 101%;
+      @media (min-width: 900px) {
+        display: initial;
+      }
     }
   }
 
@@ -150,11 +167,11 @@ export default {
     display: none;
     flex: 2;
     background-size: cover;
-    background-image: url('../assets/background.png');
+    background-image: url("../assets/background.png");
     width: 100%;
     height: 100%;
-    @media(min-width: 900px) {
-        display: initial;
+    @media (min-width: 900px) {
+      display: initial;
     }
   }
 }

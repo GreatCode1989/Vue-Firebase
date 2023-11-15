@@ -8,11 +8,37 @@
       </div>
       <div class="nav-links">
         <ul v-show="!mobile">
-          <router-link class="link" :to="{name: 'home'}">Home</router-link>
-          <router-link class="link" :to="{name: 'blogs'}">Blogs</router-link>
-          <router-link class="link" :to="{name: 'newPost'}">Create Post</router-link>
-          <router-link class="link" :to="{name: 'login'}">Login/Reister</router-link>
+          <router-link class="link" :to="{ name: 'home' }">Home</router-link>
+          <router-link class="link" :to="{ name: 'blogs' }">Blogs</router-link>
+          <router-link class="link" :to="{ name: 'newPost' }"
+            >Create Post</router-link
+          >
+          <router-link class="link" :to="{ name: 'login' }"
+            >Login/Reister</router-link
+          >
         </ul>
+
+        <div class="profile" ref="profile">
+          <span>{{ this.$store.state.profileInitials }}</span>
+          <div class="profile-menu">
+            <div class="info">
+              <p class="initials">{{ this.$store.state.profileInitials }}</p>
+              <div class="right">
+                <p>
+                  {{ this.$store.state.profileFirstName }}
+                  {{ this.$store.state.profileLastName }}
+                </p>
+                <p>{{ this.$store.state.profileUserName }}</p>
+                <p>{{ this.$store.state.profileEmail }}</p>
+              </div>
+            </div>
+            <div class="options">
+              <div class="option">
+                <router-link class="option" to="#"></router-link>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </nav>
     <img
@@ -24,10 +50,14 @@
     />
     <transition class="mobile-bar" name="mobile-nav">
       <ul v-show="mobileNav">
-        <router-link class="link" :to="{name: 'home'}">Home</router-link>
-        <router-link class="link" :to="{name: 'blogs'}">Blogs</router-link>
-        <router-link class="link" :to="{name: 'newPost'}">Create Post</router-link>
-        <router-link class="link" :to="{name: 'login'}">Login/Reister</router-link>
+        <router-link class="link" :to="{ name: 'home' }">Home</router-link>
+        <router-link class="link" :to="{ name: 'blogs' }">Blogs</router-link>
+        <router-link class="link" :to="{ name: 'newPost' }"
+          >Create Post</router-link
+        >
+        <router-link class="link" :to="{ name: 'login' }"
+          >Login/Reister</router-link
+        >
       </ul>
     </transition>
   </header>
@@ -159,11 +189,14 @@ nav {
 }
 
 .mobile-nav-enter-to {
-  transform: translateX(0); /* Конечное состояние - возврат в исходное положение */
+  transform: translateX(
+    0
+  ); /* Конечное состояние - возврат в исходное положение */
 }
 
 .mobile-nav-leave-to {
-  transform: translateX(-250px); /* Конечное состояние при выходе - смещение влево */
+  transform: translateX(
+    -250px
+  ); /* Конечное состояние при выходе - смещение влево */
 }
-
 </style>
