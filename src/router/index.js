@@ -1,71 +1,88 @@
-import { createRouter, createWebHistory } from 'vue-router'
-import HomeView from '../views/HomeView.vue'
-import Login from '@/views/Login.vue'
-import Blogs from '@/views/Blogs.vue'
-import CreatePost from '@/views/CreatePost.vue'
-import Register from '@/views/Register.vue'
-import ForgotPassword from '@/views/ForgotPassword.vue'
+import { createRouter, createWebHistory } from "vue-router";
+import HomeView from "../views/HomeView.vue";
+import Login from "@/views/Login.vue";
+import Blogs from "@/views/Blogs.vue";
+import CreatePost from "@/views/CreatePost.vue";
+import Register from "@/views/Register.vue";
+import ForgotPassword from "@/views/ForgotPassword.vue";
+import Admin from "@/views/Admin.vue";
+import Profile from "@/views/Profile.vue";
 
 const routes = [
   {
-    path: '/',
-    name: 'home',
+    path: "/",
+    name: "home",
     component: HomeView,
     meta: {
-      title: 'Home'
-    }
+      title: "Home",
+    },
   },
   {
-    path: '/blogs',
-    name: 'blogs',
+    path: "/blogs",
+    name: "blogs",
     component: Blogs,
     meta: {
-      title: 'Blogs'
-    }
+      title: "Blogs",
+    },
   },
   {
-    path: '/login',
-    name: 'login',
+    path: "/login",
+    name: "login",
     component: Login,
     meta: {
-      title: 'Login'
-    }
+      title: "Login",
+    },
   },
   {
-    path: '/register',
-    name: 'register',
+    path: "/register",
+    name: "register",
     component: Register,
     meta: {
-      title: 'Register'
-    }
+      title: "Register",
+    },
   },
   {
-    path: '/forgot-password',
-    name: 'forgotPassword',
+    path: "/forgot-password",
+    name: "forgotPassword",
     component: ForgotPassword,
     meta: {
-      title: 'Forgot Password'
-    }
+      title: "Forgot Password",
+    },
   },
   {
-    path: '/newpost',
-    name: 'newPost',
+    path: "/newpost",
+    name: "newPost",
     component: CreatePost,
     meta: {
-      title: 'New Post'
-    }
+      title: "New Post",
+    },
   },
- 
-]
+  {
+    path: "/admin",
+    name: "admin",
+    component: Admin,
+    meta: {
+      title: "Admin",
+    },
+  },
+  {
+    path: "/profile",
+    name: "profile",
+    component: Profile,
+    meta: {
+      title: "Profile",
+    },
+  },
+];
 
 const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
-  routes
-})
+  routes,
+});
 
 router.beforeEach((to, from, next) => {
-  document.title = `${to.meta.title} | FireBlog`
-  next()
-})
+  document.title = `${to.meta.title} | FireBlog`;
+  next();
+});
 
-export default router
+export default router;

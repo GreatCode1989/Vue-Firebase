@@ -1,69 +1,72 @@
 <template>
   <footer>
-
-  <div class="container">
-    <div class="left">
-      <div class="col-1">
-        <router-link class="header" :to="{ name: 'home' }"
-          >FireBlogs</router-link
-        >
-        <ul>
-          <li>
-            <a href="#"
-              ><img
-                class="svg-icon"
-                src="../assets/Icons/youtube.png"
-                alt=""
-            /></a>
-          </li>
-          <li>
-            <a href="#"
-              ><img
-                class="svg-icon"
-                src="../assets/Icons/twitter.png"
-                alt=""
-            /></a>
-          </li>
-          <li>
-            <a href="#"
-              ><img
-                class="svg-icon"
-                src="../assets/Icons/instagram.jpg"
-                alt=""
-            /></a>
-          </li>
-          <li>
-            <a href="#"
-              ><img
-                class="svg-icon"
-                src="../assets/Icons/linkedin.png"
-                alt=""
-            /></a>
-          </li>
-        </ul>
+    <div class="container">
+      <div class="left">
+        <div class="col-1">
+          <router-link class="header" :to="{ name: 'home' }"
+            >FireBlogs</router-link
+          >
+          <ul>
+            <li>
+              <a href="#"
+                ><img class="svg-icon" src="../assets/Icons/youtube.png" alt=""
+              /></a>
+            </li>
+            <li>
+              <a href="#"
+                ><img class="svg-icon" src="../assets/Icons/twitter.png" alt=""
+              /></a>
+            </li>
+            <li>
+              <a href="#"
+                ><img
+                  class="svg-icon"
+                  src="../assets/Icons/instagram.jpg"
+                  alt=""
+              /></a>
+            </li>
+            <li>
+              <a href="#"
+                ><img
+                  class="svg-icon"
+                  src="../assets/Icons/linkedin.png"
+                  alt=""
+              /></a>
+            </li>
+          </ul>
+        </div>
+        <div class="col-2">
+          <ul>
+            <router-link class="link" :to="{ name: 'home' }">Home</router-link>
+            <router-link class="link" :to="{ name: 'blogs' }"
+              >Blogs</router-link
+            >
+            <router-link v-if="user" class="link" :to="{ name: 'newPost' }"
+              >Create Post</router-link
+            >
+            <router-link v-if="!user" class="link" :to="{ name: 'login' }"
+              >Login In/Register</router-link
+            >
+          </ul>
+        </div>
       </div>
-      <div class="col-2">
-        <ul>
-          <router-link class="link" :to="{ name: 'home' }">Home</router-link>
-          <router-link class="link" :to="{ name: 'blogs' }">Blogs</router-link>
-          <router-link v-if="user" class="link" :to="{ name: 'newpost' }"
-            >Create Post</router-link
-          >
-          <router-link v-if="!user" class="link" :to="{ name: 'login' }"
-            >Login In/Register</router-link
-          >
-        </ul>
+      <div class="right">
+        <p>Copyright 2023 All Rights Reserved</p>
       </div>
     </div>
-    <div class="right">
-      <p>Copyright 2023 All Rights Reserved</p>
-    </div>
-  </div>
   </footer>
 </template>
 
 <script>
-export default { name: "footer", components: {} };
+export default {
+  name: "footer",
+  components: {},
+  computed: {
+    user() {
+      return this.$store.state.user;
+    },
+  },
+};
 </script>
 
 <style lang="scss" scoped>
@@ -142,8 +145,6 @@ footer {
           li {
             display: flex;
             align-items: center;
-
-            
           }
         }
       }
@@ -169,24 +170,24 @@ footer {
     }
 
     .right {
-        gap: 32px;
-        color:azure;
-        align-items: center;
-        flex-direction: column;
-        @media (min-width: 800px) {
-            align-items: flex-end;
-            gap: 0;
-        }
+      gap: 32px;
+      color: azure;
+      align-items: center;
+      flex-direction: column;
+      @media (min-width: 800px) {
+        align-items: flex-end;
+        gap: 0;
+      }
     }
 
     p {
-        margin-top: auto;
+      margin-top: auto;
     }
   }
   .svg-icon {
-              width: 24px;
-              height: auto;
-              color: beige;
-            }
+    width: 24px;
+    height: auto;
+    color: beige;
+  }
 }
 </style>
