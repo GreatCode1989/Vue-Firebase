@@ -14,6 +14,7 @@ import Navigation from "./components/Navigation.vue";
 import Footer from "./components/Footer.vue";
 import firebase from "firebase/app";
 import "firebase/auth";
+import { get } from "http";
 
 export default {
   name: "app",
